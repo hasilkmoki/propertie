@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-gold: #c9a84c;
+  --color-luxury-black: #0a0a0a;
+}
+
+@layer base {
+  body {
+    @apply bg-luxury-black text-white font-sans selection:bg-gold selection:text-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-gold/20;
+  }
+
+  .glass-nav {
+    @apply backdrop-blur-xl bg-black/40 border-b border-gold/30;
+  }
+
+  .hero-gradient {
+    @apply absolute inset-0 transition-opacity duration-1000;
+    background: linear-gradient(to right, rgba(10, 10, 10, 0.95) 20%, rgba(10, 10, 10, 0.4) 100%);
+  }
+
+  .gold-line {
+    @apply h-1 w-24 bg-gold shadow-[0_0_15px_rgba(201,168,76,0.6)];
+  }
+
+  .shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(201, 168, 76, 0.2),
+      transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.75s;
+  }
+
+  .property-card:hover .shimmer {
+    left: 150%;
+  }
+
+  .gold-badge {
+    @apply absolute top-4 left-4 bg-gold text-black px-3 py-1 font-bold text-[9px] uppercase tracking-widest z-10;
+  }
+
+  .price-glow {
+    @apply text-gold font-serif text-lg shadow-gold/20;
+    text-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+  }
+
+  .nav-underline {
+    @apply absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full;
+  }
+
+  .pulse-gold {
+    animation: pulse-gold 2s infinite;
+  }
+
+  @keyframes pulse-gold {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(201, 168, 76, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+  }
+
+  .pulse-green {
+    animation: pulse-green 2s infinite;
+  }
+
+  @keyframes pulse-green {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+
+  .custom-cursor {
+    @apply fixed top-0 left-0 w-12 h-12 border border-gold/20 rounded-full pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block transition-transform duration-300;
+    backdrop-filter: blur(1px);
+  }
+
+  .custom-cursor-dot {
+    @apply fixed top-0 left-0 w-1.5 h-1.5 bg-gold rounded-full pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block;
+    box-shadow: 0 0 10px rgba(201, 168, 76, 0.8);
+  }
+
+  .gold-button {
+    @apply px-8 py-4 bg-gold text-black text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:bg-[#b0923e] hover:shadow-[0_0_20px_rgba(201,168,76,0.2)];
+  }
+
+  .outline-button {
+    @apply px-8 py-4 bg-transparent border border-white/30 text-white text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:border-gold hover:text-gold;
+  }
+
+  .view-button {
+    @apply px-6 py-2 border border-gold text-gold text-[10px] uppercase tracking-[0.2em] hover:bg-gold hover:text-black transition-all font-semibold italic;
+  }
+
+  .property-card {
+    @apply backdrop-blur-xl bg-white/5 border border-gold/20 p-4 transition-all duration-300 border-white/10 hover:border-gold hover:-translate-y-2 overflow-hidden relative;
+  }
+
+  .stat-card {
+    @apply flex flex-col px-8 py-2 border-l border-white/10 first:border-l-0;
+  }
+
+  .stat-line {
+    @apply h-px w-full;
+    background: linear-gradient(to right, #c9a84c, transparent);
+  }
+}
+
+/* Restore default cursor visibility but keep custom follower */
+@media (min-width: 768px) {
+  body, a, button, input, textarea {
+    cursor: default;
+  }
+  a, button {
+    cursor: pointer;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b0923e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
